@@ -14,14 +14,41 @@ Follow the below steps to create the integration server
 
 
 ## NOTES: Integrating testNG testcases in pipeline
-- To run automation in the remote machine from the integration server
+
+### To run automation in the remote machine from the integration server
      * we dont need to install the browsers, driver binaries and xvfb in CI/CD server
      * Also note that both the CI/CD server, stage-VM and Selenium-grid should be in same network
-     
-- To run automation in the CI/CD server itself
+     * below is the syntax to create a remote driver in selenium
+
+```
+ final ChromeOptions chromeOptions = new ChromeOptions();
+	chromeOptions.addArguments("--headless");
+	chromeOptions.addArguments("--no-sandbox");
+	chromeOptions.addArguments("--disable-dev-shm-usage");
+	chromeOptions.addArguments("--window-size=1200x600");
+ chromeOptions.setBinary("/usr/bin/google-chrome");
+	DesiredCapabilities capability1 = DesiredCapabilities.chrome();
+	capability1.setBrowserName("chrome");
+	capability1.setPlatform(Platform.LINUX);
+	capability1.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+	WebDriver driver = new RemoteWebDriver(new URL("http://192.168.33.13:4444/wd/hub"), capability1);
+```
+Where http://192.168.33.13:4444/wd/hub is the Selenium hub server URL
+
+   * We run automation for the product deployed in stage-vm as below
+   
+```
+
+driver.get("http://192.168.33.10/helloworld.html");
+
+```
+where 192.168.33.10 is the IP Address of the stage VM
+
+
+### To run automation in the CI/CD server itself
      * we need to install the browsers, driver binaries and xvfb in CI/CD server
      
-### Pipeline file for testNG test cases would be like
+#### Pipeline file for testNG test cases would be like
 
 ```
 
@@ -48,7 +75,7 @@ deploy:
 ## NOTES: Integrating katalon testcases in pipeline
 * you have to add the katalon licence file which you have bought inside the runtime engine manually, only the you can integrate the katalon test cases with the integration server
      
-### Pipeline file for Katalon test cases would be like
+#### Pipeline file for Katalon test cases would be like
 
 ```
 run_katalon_test_suite:
