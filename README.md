@@ -15,11 +15,11 @@ Follow the below steps to create the integration server
 
 ## NOTES: Integrating testNG testcases in pipeline
 - To run automation in the remote machine from the integration server
-     * we dont need to install the browsers, driver binaries and xvfb in CI server
+     * we dont need to install the browsers, driver binaries and xvfb in CI/CD server
      * Also note that both the CI/CD server, stage-VM and Selenium-grid should be in same network
      
 - To run automation in the CI/CD server itself
-     * we need to install the browsers, driver binaries and xvfb in CI server
+     * we need to install the browsers, driver binaries and xvfb in CI/CD server
      
 ## NOTES: Integrating katalon testcases in pipeline
      * you have to add the katalon licence file which you have bought inside the runtime engine manually, only the you can integrate the katalon test cases with the integration server
