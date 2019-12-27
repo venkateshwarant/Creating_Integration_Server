@@ -21,7 +21,8 @@ Follow the below steps to create the integration server
 - To run automation in the CI/CD server itself
      * we need to install the browsers, driver binaries and xvfb in CI/CD server
      
-     pipeline file for testNG test cases would be like
+### Pipeline file for testNG test cases would be like
+
 ```
 
 image: maven:latest
@@ -47,9 +48,9 @@ deploy:
 ```
      
 ## NOTES: Integrating katalon testcases in pipeline
-     * you have to add the katalon licence file which you have bought inside the runtime engine manually, only the you can integrate the katalon test cases with the integration server
+* you have to add the katalon licence file which you have bought inside the runtime engine manually, only the you can integrate the katalon test cases with the integration server
      
-          pipeline file for Katalon test cases would be like
+### Pipeline file for Katalon test cases would be like
 
 ```
 run_katalon_test_suite:
